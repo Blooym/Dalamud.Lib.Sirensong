@@ -38,13 +38,13 @@ namespace Sirensong.UserInterface.Windowing
         /// <summary>
         ///     The config window to use for <see cref="UiBuilder.OpenConfigUi" />.
         /// </summary>
-        public Window? ConfigWindow { get; private set; }
+        public IWindow? ConfigWindow { get; private set; }
 
         /// <summary>
         ///     Gets all windows in the windowing system.
         /// </summary>
         /// <returns>An array of all windows in the windowing system.</returns>
-        public IReadOnlyList<Window> Windows => this.windowSystem.Windows;
+        public IReadOnlyList<IWindow> Windows => this.windowSystem.Windows;
 
         /// <summary>
         ///     Disposes of the windowing manager and all windows that are bound to it.
@@ -75,7 +75,7 @@ namespace Sirensong.UserInterface.Windowing
         ///     Sets the config window to use for <see cref="UiBuilder.OpenConfigUi" />.
         /// </summary>
         /// <param name="window">The window to use as the config window.</param>
-        public void SetConfigWindow(Window window)
+        public void SetConfigWindow(IWindow window)
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 
@@ -105,7 +105,7 @@ namespace Sirensong.UserInterface.Windowing
         /// </summary>
         /// <typeparam name="T">The type of window to get.</typeparam>
         /// <returns>The first window with the specified type in the windowing system, or null if it does not exist.</returns>
-        public Window? GetWindow<T>() where T : Window
+        public IWindow? GetWindow<T>() where T : IWindow
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 
@@ -117,7 +117,7 @@ namespace Sirensong.UserInterface.Windowing
         /// </summary>
         /// <typeparam name="T">The type of window to get.</typeparam>
         /// <param name="windowOut">The window with the specified type, or null if it does not exist.</param>
-        public bool TryGetWindow<T>(out Window windowOut) where T : Window
+        public bool TryGetWindow<T>(out IWindow windowOut) where T : IWindow
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 
@@ -133,7 +133,7 @@ namespace Sirensong.UserInterface.Windowing
         /// </remarks>
         /// <param name="window">The window to add.</param>
         /// <param name="isConfigWindow">Whether or not the window is the config window.</param>
-        public void AddWindow(Window window, bool isConfigWindow = false)
+        public void AddWindow(IWindow window, bool isConfigWindow = false)
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 
@@ -154,7 +154,7 @@ namespace Sirensong.UserInterface.Windowing
         ///     If multiple windows are added as config windows, the last one added will be used.
         /// </remarks>
         /// <params name="windows">The windows to add.</params>
-        public void AddWindows(Dictionary<Window, bool> windows)
+        public void AddWindows(Dictionary<IWindow, bool> windows)
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 
@@ -168,7 +168,7 @@ namespace Sirensong.UserInterface.Windowing
         ///     Removes a window from the windowing system and disposes of it if it implements <see cref="IDisposable" />.
         /// </summary>
         /// <param name="window">The window to remove.</param>
-        public void RemoveWindow(Window window)
+        public void RemoveWindow(IWindow window)
         {
             ObjectDisposedException.ThrowIf(this.disposedValue, nameof(WindowingSystem));
 

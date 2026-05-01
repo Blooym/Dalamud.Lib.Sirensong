@@ -1,6 +1,7 @@
 # Editors
 .idea/
 *.DotSettings.*
+.direnv/
 
 # CSharp outputs
 **/*/obj

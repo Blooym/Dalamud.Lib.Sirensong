@@ -15,7 +15,7 @@ namespace Sirensong.Game.Helpers
         /// <returns>An <see cref="IEnumerable{T}" /> of <see cref="IPlayerCharacter" />s.</returns>
         public static unsafe IEnumerable<IPlayerCharacter> GetCharacters() =>
             (IEnumerable<IPlayerCharacter>)SharedServices.ObjectTable.Where(
-                x => x.ObjectKind == ObjectKind.Player &&
+                x => x.ObjectKind == ObjectKind.Pc &&
                 x.GetType() == typeof(IPlayerCharacter) &&
                 x.EntityId > HighestValidObjectId);
     }
